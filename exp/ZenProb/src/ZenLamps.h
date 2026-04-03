@@ -29,7 +29,7 @@ public:
 
 	virtual void poll();
 
-	void setIntensity(uint8_t i = 0xFF); //0 is most intense
+	void setIntensity(uint8_t i = 0xFF);
 
 	void doZen(uint8_t alpha = 0xFF);
 	void drawLine(uint x, uint y, uint length=1,  uint32_t  color = 0xFFFFFF);
@@ -39,7 +39,7 @@ private:
 	uint32_t xColor = 0;
 	uint xSeq = 0;
 	bool xBright = true;
-	uint8_t xIntensity = 0xFF;
+	uint8_t xIntensity = 0x0;
 };
 
 #endif /* EXP_ZENLIGHTS_SRC_ZENLAMPS_H_ */

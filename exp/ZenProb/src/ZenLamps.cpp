@@ -36,19 +36,22 @@ ZenLamps::~ZenLamps() {
 void ZenLamps::poll(){
 	uint8_t alpha = 0x00;
 
-	if (xSeq > xIntensity){
+	uint8_t steps = 0xFF - xIntensity;
+
+	if (xSeq >= steps){
 		xSeq = 0;
 	}
 
-	if (xSeq < xIntensity/2){
-		alpha = (xSeq/ (xIntensity /2.0)) * 255.0 ;
+	uint8_t half = steps/2;
+	if (xSeq < half){
+		//Brighten
+		alpha = ((float)xSeq/ (float)half) * 255.0 ;
 	} else {
-		alpha = 0xFF;
+		alpha = ((float)(half - (xSeq - half))/ (float)half) * 255.0 ;
 	}
 	if (xSeq == 0){
 		doZen(alpha);
 	} else {
-
 		pCanvas->show(alpha);
 	}
 	xSeq++;
