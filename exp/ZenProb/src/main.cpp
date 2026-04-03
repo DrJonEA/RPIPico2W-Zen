@@ -12,7 +12,7 @@
 
 #include "Animation.h"
 #include "ZenLamps.h"
-
+#include "pico/rand.h"
 
 #define ANIM_TIME 10000
 
@@ -39,7 +39,11 @@ int main(){
 
 	canvas.clear();
 	ZenLamps zen(&canvas);
+	zen.setIntensity(0x80);
+	zen.setSpeed(0x40);
 	for (;;){
+		uint32_t c = get_rand_32 ();
+		zen.setColor(c, 0x000020);
 		zen.poll();
 		sleep_ms(20);
 	}

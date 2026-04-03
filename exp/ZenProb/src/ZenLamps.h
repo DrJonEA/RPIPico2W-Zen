@@ -16,10 +16,10 @@
 
 
 struct ZenLine {
-	uint length;
-	uint32_t onProb;
-	uint32_t lenProb;
-	uint32_t mulProb;
+	uint8_t maxLen;
+	uint8_t onProb;
+	uint8_t mulProb;
+	uint8_t intensityDiv;
 };
 
 class ZenLamps : public Animation {
@@ -29,17 +29,23 @@ public:
 
 	virtual void poll();
 
-	void setIntensity(uint8_t i = 0xFF);
+	void setIntensity(uint8_t i = 0);
+	void setSpeed(uint8_t i = 0);
+	void setColor(uint32_t color, uint32_t variance = 0x00);
 
 	void doZen(uint8_t alpha = 0xFF);
 	void drawLine(uint x, uint y, uint length=1,  uint32_t  color = 0xFFFFFF);
 
 private:
+	uint32_t getColor();
 	struct ZenLine xLines[ZEN_ROWS];
-	uint32_t xColor = 0;
 	uint xSeq = 0;
 	bool xBright = true;
-	uint8_t xIntensity = 0x0;
+	uint8_t xIntensity = 0x01;
+	uint8_t xSpeed = 0x0;
+
+	uint32_t xColor = 0xFFFFFF;
+	uint32_t xColorVar = 0x0;
 };
 
 #endif /* EXP_ZENLIGHTS_SRC_ZENLAMPS_H_ */
